@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 if(saveUri != null){
                     String name = catName.getEditText().getText().toString().trim();
                     ProgressDialog progressDialog = new ProgressDialog(getContext());
-                    progressDialog.setMessage("Uploading Image....");
+                    progressDialog.setMessage("Uploading Category....");
                     progressDialog.show();
 
                     SharedPreferences preferences = getActivity().getSharedPreferences(MainActivity.CATEGORIES,Context.MODE_PRIVATE);

@@ -21,12 +21,18 @@ public class SplashActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+        SharedPreferences.Editor editor = getSharedPreferences(MainActivity.CATEGORIES,MODE_PRIVATE).edit();
+        editor.putString(MainActivity.CATCOUNTER,"5");
+        editor.apply();
+        editor.commit();
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                if (firebaseUser != null) {
+                if (firebaseUser !=null) {
                     //some user logged in
                     startActivity(new Intent(SplashActivity.this,MainActivity.class));
                     finish();

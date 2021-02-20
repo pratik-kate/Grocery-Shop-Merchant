@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.supertridents.ecom.merchant.MainActivity;
 import com.supertridents.ecom.merchant.R;
 import com.supertridents.ecom.merchant.adapter.MenuViewHolder;
 import com.supertridents.ecom.merchant.model.HomeModel;
@@ -161,7 +163,18 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                     ProgressDialog progressDialog = new ProgressDialog(getContext());
                     progressDialog.setMessage("Uploading Image....");
                     progressDialog.show();
-                    StorageReference filepath = storageReference.child("category").child(saveUri.getLastPathSegment());
+
+                    SharedPreferences preferences = getActivity().getSharedPreferences(MainActivity.CATEGORIES,Context.MODE_PRIVATE);
+                    int count = Integer.parseInt(preferences.getString(MainActivity.CATCOUNTER,"5"));
+                    count++;
+
+                    String nCategory = String.valueOf(count);
+
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences(MainActivity.CATEGORIES,Context.MODE_PRIVATE).edit();
+                    editor.putString(MainActivity.CATCOUNTER,nCategory);
+                    editor.apply();
+                    editor.commit();
+                    StorageReference filepath = storageReference.child("category").child(nCategory);
                     filepath.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -174,7 +187,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                                     map.put("image",download.toString());
                                     map.put("name",name);
 
-                                    FirebaseDatabase.getInstance().getReference().child("category").push().setValue(map)
+                                    FirebaseDatabase.getInstance().getReference().child("category").child(nCategory).setValue(map)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -185,12 +198,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                             progressDialog.dismiss();
+                                            dialog2.dismiss();
+
                                         }
                                     }).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
                                             progressDialog.dismiss();
+                                            dialog2.dismiss();
                                         }
                                     });
                                 }

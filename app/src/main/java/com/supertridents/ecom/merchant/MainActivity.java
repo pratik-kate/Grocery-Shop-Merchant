@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String  PRODUCTQUANTITY = "PRODUCTQUANTITY" ;
     public static final String CATEGORIES = "CATEGORIES" ;
     public static final String CATCOUNTER = "CARTCOUNTER" ;
-    public static final String ITEMCOUNTER = "ITEMCOUNTER" ;
     public static int CARTCOUNTER= 0;
     LinearLayout screen;
     public static final String INFO ="INFO";

@@ -23,7 +23,6 @@ public class SplashActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = getSharedPreferences(MainActivity.CATEGORIES,MODE_PRIVATE).edit();
         editor.putString(MainActivity.CATCOUNTER,"5");
-        editor.putString(MainActivity.ITEMCOUNTER,"25");
         editor.apply();
         editor.commit();
 

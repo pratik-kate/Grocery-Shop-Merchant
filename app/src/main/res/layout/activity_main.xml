@@ -57,7 +57,7 @@
             app:bt_icon="@drawable/ic_shop"
             app:bt_padding="@dimen/internal_padding"
             app:bt_shape="@drawable/transition_background_drawable_home"
-            app:bt_title="Cart"
+            app:bt_title="Orders"
             app:bt_titlePadding="@dimen/title_padding"
             app:layout_constraintEnd_toStartOf="@+id/l_item_profile"
             app:layout_constraintStart_toEndOf="@+id/l_item_home"

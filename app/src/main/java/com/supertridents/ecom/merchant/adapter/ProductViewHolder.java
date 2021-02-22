@@ -82,109 +82,92 @@ public class ProductViewHolder extends RecyclerView.Adapter<ProductViewHolder.Vi
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                final Dialog dialog2 = new Dialog(context);
-//                dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-//                dialog2.setContentView(R.layout.product);
-//                dialog2.setCancelable(true);
-//                WindowManager.LayoutParams lp2 = new WindowManager.LayoutParams();
-//                lp2.copyFrom(dialog2.getWindow().getAttributes());
-//                lp2.width = WindowManager.LayoutParams.MATCH_PARENT;
-//                lp2.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//
-//                TextInputLayout productName = (dialog2.findViewById(R.id.item_name));
-//                TextInputLayout productDescription = (dialog2.findViewById(R.id.item_des));
-//                TextInputLayout productPrice = (dialog2.findViewById(R.id.item_price));
-//
-//
-//               TextView chooseImage = dialog2.findViewById(R.id.chooseImage);
-//                TextView additem = dialog2.findViewById(R.id.additem);
-//
-//                chooseImage.setOnClickListener(v1 -> {
-//                    Intent intentimg = new Intent();
-//                    intentimg.setType("image/*");
-//                    intentimg.setAction(Intent.ACTION_GET_CONTENT);
-//                    //saveUri = intentimg.getData();
-//                  startActivityForResult(Intent.createChooser(intentimg,"select Picture"),PICK_IMAGE_REQUEST);
-//                });
-//                additem.setOnClickListener(v1 -> {
-//                    if(saveUri == null){
-//                        String name = productName.getEditText().getText().toString().trim();
-//                        String desc = productDescription.getEditText().getText().toString().trim();
-//                        String price = productPrice.getEditText().getText().toString().trim();
-//                        ProgressDialog progressDialog = new ProgressDialog(context);
-//                        progressDialog.setMessage("Uploading Product....");
-//                        progressDialog.show();
-//
-//                        SharedPreferences preferences = context.getSharedPreferences(MainActivity.CATEGORIES, Context.MODE_PRIVATE);
-//                        int count = Integer.parseInt(preferences.getString(MainActivity.ITEMCOUNTER,"25"));
-//                        count++;
-//
-//                        String nCategory = String.valueOf(count);
-//
-//                        SharedPreferences.Editor editor =context.getSharedPreferences(MainActivity.CATEGORIES,Context.MODE_PRIVATE).edit();
-//                        editor.putString(MainActivity.CATCOUNTER,nCategory);
-//                        editor.apply();
-//                        editor.commit();
-//                        StorageReference filepath = storageReference.child("products").child(nCategory);
-//                        filepath.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                    @Override
-//                                    public void onSuccess(Uri uri) {
-//                                        Uri download=uri;
-//
-//                                        HashMap<String ,Object> map = new HashMap<>();
-//                                        //map.put("image",download.toString());
-//                                        map.put("name",name);
-//                                        map.put("description",desc);
-//                                        map.put("price",price);
-//                                        map.put("catId",categoryId);
-//
-//                                        FirebaseDatabase.getInstance().getReference().child("products").child(nCategory).setValue(map)
-//                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                    @Override
-//                                                    public void onComplete(@NonNull Task<Void> task) {
-//                                                        //Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                }).addOnFailureListener(new OnFailureListener() {
-//                                            @Override
-//                                            public void onFailure(@NonNull Exception e) {
-//                                                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-//                                                progressDialog.dismiss();
-//                                                dialog2.dismiss();
-//
-//                                            }
-//                                        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                            @Override
-//                                            public void onSuccess(Void aVoid) {
-//                                                Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
-//                                                progressDialog.dismiss();
-//                                                dialog2.dismiss();
-//                                            }
-//                                        });
-//                                    }
-//                                });
-//                            }
-//                        });
-//
-//
-//                    }
-//
-//                });
-//
-//
-//                dialog2.show();
-//                dialog2.getWindow().setAttributes(lp2);
-//
-//            }
-//        });
-//
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                final Dialog dialog2 = new Dialog(context);
+                dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                dialog2.setContentView(R.layout.product);
+                dialog2.setCancelable(true);
+                WindowManager.LayoutParams lp2 = new WindowManager.LayoutParams();
+                lp2.copyFrom(dialog2.getWindow().getAttributes());
+                lp2.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp2.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                TextInputLayout productName = (dialog2.findViewById(R.id.item_name));
+                TextInputLayout productDescription = (dialog2.findViewById(R.id.item_des));
+                TextInputLayout productPrice = (dialog2.findViewById(R.id.item_price));
+
+
+               TextView chooseImage = dialog2.findViewById(R.id.chooseImage);
+                TextView additem = dialog2.findViewById(R.id.additem);
+
+                additem.setOnClickListener(v1 -> {
+                    if(saveUri == null){
+                        String name = productName.getEditText().getText().toString().trim();
+                        String desc = productDescription.getEditText().getText().toString().trim();
+                        String price = productPrice.getEditText().getText().toString().trim();
+                        ProgressDialog progressDialog = new ProgressDialog(context);
+                        progressDialog.setMessage("Uploading Product....");
+                        progressDialog.show();
+
+                        SharedPreferences preferences = context.getSharedPreferences(MainActivity.CATEGORIES, Context.MODE_PRIVATE);
+                        int count = Integer.parseInt(preferences.getString(MainActivity.ITEMCOUNTER,"25"));
+                        count++;
+
+                        String nCategory = String.valueOf(count);
+
+                        SharedPreferences.Editor editor =context.getSharedPreferences(MainActivity.CATEGORIES,Context.MODE_PRIVATE).edit();
+                        editor.putString(MainActivity.CATCOUNTER,nCategory);
+                        editor.apply();
+                        editor.commit();
+
+                                        HashMap<String ,Object> map = new HashMap<>();
+                                        //map.put("image",download.toString());
+                                        map.put("name",name);
+                                        map.put("description",desc);
+                                        map.put("price",price);
+                                        map.put("catId",categoryId);
+
+                                        FirebaseDatabase.getInstance().getReference().child("products").child(nCategory).setValue(map)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        //Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                dialog2.dismiss();
+
+                                            }
+                                        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                dialog2.dismiss();
+                                            }
+                                        });
+
+
+
+
+                    }
+
+                });
+
+
+                dialog2.show();
+                dialog2.getWindow().setAttributes(lp2);
+
+            }
+        });
+
 
     }
 

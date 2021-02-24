@@ -66,7 +66,6 @@ public class OrdersViewHolder extends RecyclerView.Adapter<OrdersViewHolder.View
         holder.amount.setText(modelArrayList.get(position).getAmount());
         holder.products.setText(textproduct);
         textproduct="";
-
     }
 
     @Override

@@ -47,6 +47,7 @@ import com.supertridents.ecom.merchant.MainActivity;
 import com.supertridents.ecom.merchant.R;
 import com.supertridents.ecom.merchant.adapter.MenuViewHolder;
 import com.supertridents.ecom.merchant.model.HomeModel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import static android.app.Activity.RESULT_OK;
@@ -71,7 +72,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     TextView chooseImage,addcat;
     Uri saveUri;
     private final int PICK_IMAGE_REQUEST = 1;
-    HomeModel category;
+    public static ArrayList<String> names;
+    public static ArrayList<String> images;
 
 
     public HomeFragment() {
@@ -86,45 +88,19 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         shimmerFrameLayout = view.findViewById(R.id.shimmerLayout);
         shimmerFrameLayout.startShimmer();
+        myref = FirebaseDatabase.getInstance().getReference();
+        images = new ArrayList<>();
+        names = new ArrayList<>();
+
         //banner
         sliderLayout = (SliderLayout)view.findViewById(R.id.slider);
-        AddImageUrlFormLocalRes();
-        for(String name : HashMapForLocalRes.keySet()){
-
-            TextSliderView textSliderView = new TextSliderView(getContext());
-
-            textSliderView
-                    .description(name)
-                    .image(HashMapForLocalRes.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
-                        @Override
-                        public void onSliderClick(BaseSliderView slider) {
-                            Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-            textSliderView.bundle(new Bundle());
-
-            textSliderView.getBundle()
-                    .putString("extra",name);
-
-            sliderLayout.addSlider(textSliderView);
-        }
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.DepthPage);
-        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.setCustomAnimation(new DescriptionAnimation());
-        sliderLayout.setDuration(3000);
-        sliderLayout.addOnPageChangeListener(this);
+        AddImagesUrlOnline();
 
         //Showing Categories
         list = view.findViewById(R.id.list);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         list.setLayoutManager(layoutManager);
         list.setHasFixedSize(true);
-
-        myref = FirebaseDatabase.getInstance().getReference();
-
         modelArrayList = new ArrayList<>();
         clearAll();
         getDataFromFirebase();
@@ -232,8 +208,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!=null && data.getData() != null){
             saveUri = data.getData();
-            chooseImage.setText("Image Selected");
-            chooseImage.setClickable(false);
         }
     }
 
@@ -256,7 +230,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                menuViewHolder.notifyDataSetChanged();
                shimmerFrameLayout.stopShimmer();
                shimmerFrameLayout.setVisibility(View.INVISIBLE);
-
            }
 
            @Override
@@ -281,8 +254,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
         //adapter.startListening();
     }
@@ -308,12 +280,141 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void AddImagesUrlOnline(){
 
         HashMapForURL = new HashMap<String, String>();
+//        HashMapForURL.put("CupCake", "https://github.com/pratik-kate/SampleData/blob/main/Farsan_dryfruits.jpg?raw=true");
+//        HashMapForURL.put("Donut", "https://github.com/pratik-kate/SampleData/blob/main/Farsan_dryfruits.jpg?raw=true");
+//        HashMapForURL.put("Eclair", "https://github.com/pratik-kate/SampleData/blob/main/Farsan_dryfruits.jpg?raw=true");
 
-        HashMapForURL.put("CupCake", "http://androidblog.esy.es/images/cupcake-1.png");
-        HashMapForURL.put("Donut", "http://androidblog.esy.es/images/donut-2.png");
-        HashMapForURL.put("Eclair", "http://androidblog.esy.es/images/eclair-3.png");
-        HashMapForURL.put("Froyo", "http://androidblog.esy.es/images/froyo-4.png");
-        HashMapForURL.put("GingerBread", "http://androidblog.esy.es/images/gingerbread-5.png");
+
+        FirebaseDatabase.getInstance().getReference().child("offers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+//                    images.add(snapshot.child("image").getValue().toString());
+//                    names.add(snapshot.child("description").getValue().toString());
+                    if(HashMapForURL.size()>=3){
+                        HashMapForURL.clear();
+                    }
+                    HashMapForURL.put(snapshot.child("description").getValue().toString(),snapshot.child("image").getValue().toString());
+                }
+
+                for(String name : HashMapForURL.keySet()){
+
+                    TextSliderView textSliderView = new TextSliderView(getContext());
+                    textSliderView
+                            .description(name)
+                            .image(HashMapForURL.get(name))
+                            .setScaleType(BaseSliderView.ScaleType.Fit)
+                            .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                @Override
+                                public void onSliderClick(BaseSliderView slider) {
+                                    //
+                                    final Dialog dialog2 = new Dialog(getContext());
+                                    dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                                    dialog2.setContentView(R.layout.offers);
+                                    dialog2.setCancelable(true);
+                                    WindowManager.LayoutParams lp2 = new WindowManager.LayoutParams();
+                                    lp2.copyFrom(dialog2.getWindow().getAttributes());
+                                    lp2.width = WindowManager.LayoutParams.MATCH_PARENT;
+                                    lp2.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                                    TextView img = dialog2.findViewById(R.id.chooseImage);
+                                    TextView additem = dialog2.findViewById(R.id.additem);
+                                    TextInputLayout des = dialog2.findViewById(R.id.item_des);
+
+                                    img.setOnClickListener(v1 -> {
+                                        Intent intentimg = new Intent();
+                                        intentimg.setType("image/*");
+                                        intentimg.setAction(Intent.ACTION_GET_CONTENT);
+                                        startActivityForResult(Intent.createChooser(intentimg,"select Picture"),PICK_IMAGE_REQUEST);
+                                    });
+                                    additem.setOnClickListener(v1 -> {
+                                        if(saveUri != null){
+
+                                            String s = des.getEditText().getText().toString().trim();
+
+                                            ProgressDialog progressDialog = new ProgressDialog(getContext());
+                                            progressDialog.setMessage("Uploading Product....");
+                                            progressDialog.show();
+
+                                            StorageReference filepath = storageReference.child("offers").child(name);
+                                            filepath.putFile(saveUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            Uri download=uri;
+
+                                                            HashMap<String ,Object> map = new HashMap<>();
+                                                            map.put("image",download.toString());
+                                                            map.put("description",s);
+
+
+                                                            FirebaseDatabase.getInstance().getReference().child("offers").child(name).setValue(map)
+                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    progressDialog.dismiss();
+                                                                    dialog2.dismiss();
+
+                                                                }
+                                                            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                                                                    progressDialog.dismiss();
+                                                                    dialog2.dismiss();
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+
+
+                                        }
+
+                                    });
+
+
+                                    dialog2.show();
+                                    dialog2.getWindow().setAttributes(lp2);
+
+                                    //Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                    textSliderView.bundle(new Bundle());
+
+                    textSliderView.getBundle()
+                            .putString("extra",name);
+
+                    sliderLayout.addSlider(textSliderView);
+                }
+                sliderLayout.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+                sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                sliderLayout.setCustomAnimation(new DescriptionAnimation());
+                sliderLayout.setDuration(3000);
+
+                HashMapForURL.clear();
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
     }
     public void AddImageUrlFormLocalRes(){
 
@@ -322,6 +423,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         HashMapForLocalRes.put("product1", R.drawable.demo3);
         HashMapForLocalRes.put("product2", R.drawable.demo3);
         HashMapForLocalRes.put("product3", R.drawable.demo3);
+
+
+
     }
     @Override
     public void onSliderClick(BaseSliderView slider) {

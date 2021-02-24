@@ -424,8 +424,6 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         HashMapForLocalRes.put("product2", R.drawable.demo3);
         HashMapForLocalRes.put("product3", R.drawable.demo3);
 
-
-
     }
     @Override
     public void onSliderClick(BaseSliderView slider) {

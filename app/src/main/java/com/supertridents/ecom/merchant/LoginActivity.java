@@ -1,6 +1,7 @@
 package com.supertridents.ecom.merchant;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -56,6 +57,11 @@ public class LoginActivity extends AppCompatActivity {
 
            String email = "+91"+phoneEntered.getEditText().getText().toString();
            // String email = "+918530899088";
+
+            SharedPreferences.Editor edit = getSharedPreferences(MainActivity.INFO,MODE_PRIVATE).edit();
+            edit.putString(MainActivity.EMAIL,email);
+            edit.apply();
+            edit.commit();
 
             if(email.isEmpty()) {
                 phoneEntered.setError("Field cannot be empty");

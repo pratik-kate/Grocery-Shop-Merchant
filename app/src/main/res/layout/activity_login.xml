@@ -82,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
+            android:clickable="true"
+            android:focusable="true"
             android:text="Send OTP"
             android:textColor="#FFFFFF" />
 
@@ -135,6 +137,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple"
             android:text="Sign In"
             android:textColor="#FFFFFF" />
 

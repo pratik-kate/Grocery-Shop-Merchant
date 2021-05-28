@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant;
+package com.pratikcodes.shopmerchant;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -35,8 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.supertridents.ecom.merchant.adapter.ProductViewHolder;
-import com.supertridents.ecom.merchant.model.ProductModel;
+import com.pratikcodes.shopmerchant.adapter.ProductViewHolder;
+import com.pratikcodes.shopmerchant.model.ProductModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

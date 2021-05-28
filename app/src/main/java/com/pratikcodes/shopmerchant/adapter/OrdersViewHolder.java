@@ -1,24 +1,17 @@
-package com.supertridents.ecom.merchant.adapter;
+package com.pratikcodes.shopmerchant.adapter;
 
 import android.content.Context;
 
-import android.content.Intent;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.supertridents.ecom.merchant.MainActivity;
-import com.supertridents.ecom.merchant.R;
-import com.supertridents.ecom.merchant.ShopActivity;
-import com.supertridents.ecom.merchant.model.HomeModel;
-import com.supertridents.ecom.merchant.model.OrderModel;
+import com.pratikcodes.shopmerchant.R;
+import com.pratikcodes.shopmerchant.model.OrderModel;
 
 
 import java.util.ArrayList;

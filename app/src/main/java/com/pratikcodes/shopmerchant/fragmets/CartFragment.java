@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant.fragmets;
+package com.pratikcodes.shopmerchant.fragmets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,18 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.supertridents.ecom.merchant.R;
-import com.supertridents.ecom.merchant.adapter.MenuViewHolder;
-import com.supertridents.ecom.merchant.adapter.OrdersViewHolder;
-import com.supertridents.ecom.merchant.model.HomeModel;
-import com.supertridents.ecom.merchant.model.OrderModel;
+import com.pratikcodes.shopmerchant.R;
+import com.pratikcodes.shopmerchant.adapter.OrdersViewHolder;
+import com.pratikcodes.shopmerchant.model.OrderModel;
 
 import java.util.ArrayList;
 
 
 public class CartFragment extends Fragment {
-
-
 
     RecyclerView list;
     private DatabaseReference myref;
@@ -107,9 +102,7 @@ public class CartFragment extends Fragment {
             }
         });
 
-
     }
-
     private  void clearAll(){
         if(modelArrayList != null){
             modelArrayList.clear();
@@ -118,7 +111,6 @@ public class CartFragment extends Fragment {
                 menuViewHolder.notifyDataSetChanged();
             }
         }else{
-
             modelArrayList = new ArrayList<>();
         }
     }

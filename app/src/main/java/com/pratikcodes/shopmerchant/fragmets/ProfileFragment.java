@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant.fragmets;
+package com.pratikcodes.shopmerchant.fragmets;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.supertridents.ecom.merchant.LoginActivity;
-import com.supertridents.ecom.merchant.MainActivity;
-import com.supertridents.ecom.merchant.R;
+import com.pratikcodes.shopmerchant.LoginActivity;
+import com.pratikcodes.shopmerchant.MainActivity;
+import com.pratikcodes.shopmerchant.R;
 
 import static android.content.Context.MODE_PRIVATE;
 

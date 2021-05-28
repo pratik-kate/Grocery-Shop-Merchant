@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant.fragmets;
+package com.pratikcodes.shopmerchant.fragmets;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -43,10 +43,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.supertridents.ecom.merchant.MainActivity;
-import com.supertridents.ecom.merchant.R;
-import com.supertridents.ecom.merchant.adapter.MenuViewHolder;
-import com.supertridents.ecom.merchant.model.HomeModel;
+import com.pratikcodes.shopmerchant.MainActivity;
+import com.pratikcodes.shopmerchant.R;
+import com.pratikcodes.shopmerchant.adapter.MenuViewHolder;
+import com.pratikcodes.shopmerchant.model.HomeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

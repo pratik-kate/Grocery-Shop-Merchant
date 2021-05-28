@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant.model;
+package com.pratikcodes.shopmerchant.model;
 
 public class OrderModel {
     String no,amount,name,phone,address,pincode,landmark,products;

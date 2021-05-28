@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant;
+package com.pratikcodes.shopmerchant;
 
 import android.content.Context;
 
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
- * Instrumented merchant, which will execute on an Android device.
+ * Instrumented shopmerchant, which will execute on an Android device.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
-        // Context of the app under merchant.
+        // Context of the app under shopmerchant.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.supertridents.ecom.merchant", appContext.getPackageName());
+        assertEquals("com.pratikcodes.shopmerchant", appContext.getPackageName());
     }
 }

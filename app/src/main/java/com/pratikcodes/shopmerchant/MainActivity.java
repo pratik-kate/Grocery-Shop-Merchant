@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant;
+package com.pratikcodes.shopmerchant;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,9 +9,9 @@ import android.widget.LinearLayout;
 
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
-import com.supertridents.ecom.merchant.fragmets.CartFragment;
-import com.supertridents.ecom.merchant.fragmets.HomeFragment;
-import com.supertridents.ecom.merchant.fragmets.ProfileFragment;
+import com.pratikcodes.shopmerchant.fragmets.CartFragment;
+import com.pratikcodes.shopmerchant.fragmets.HomeFragment;
+import com.pratikcodes.shopmerchant.fragmets.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 

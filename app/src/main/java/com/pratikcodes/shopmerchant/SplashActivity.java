@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant;
+package com.pratikcodes.shopmerchant;
 
 import androidx.appcompat.app.AppCompatActivity;
 

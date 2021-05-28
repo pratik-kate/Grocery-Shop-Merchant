@@ -7,7 +7,7 @@
     android:layout_width="match_parent">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,13 +56,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Sign In To Your Account"
+            android:text="Create New Account"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/logIn_email"
+            android:id="@+id/Sigup_user"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="User Name"
+                android:inputType="text"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Sigup_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +92,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/logIn_password"
+            android:id="@+id/Sigup_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,13 +108,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/sign_in"
+            android:id="@+id/sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/ripple"
-            android:text="Sign in"
+            android:text="Sign Up"
             android:textColor="#FFFFFF" />
 
 
@@ -109,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Don't Have An Account?"
+            android:text="Already Have An Account?"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -121,26 +136,14 @@
             app:srcCompat="@drawable/line" />
 
         <Button
-            android:id="@+id/sign_up_btn"
+            android:id="@+id/sign_in_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="@drawable/ripple"
-            android:text="sign up"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/googlesignin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:drawableLeft="@drawable/common_google_signin_btn_icon_light"
-            android:focusable="true"
-            android:foreground="@drawable/ripple"
-            android:text="Log In With Google"
+            android:text="sign in"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,11 @@
-package com.supertridents.ecom.merchant;
+package com.pratikcodes.shopmerchant;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Example local unit merchant, which will execute on the development machine (host).
+ * Example local unit shopmerchant, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */

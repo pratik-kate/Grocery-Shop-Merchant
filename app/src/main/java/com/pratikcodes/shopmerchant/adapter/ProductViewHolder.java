@@ -1,47 +1,25 @@
-package com.supertridents.ecom.merchant.adapter;
+package com.pratikcodes.shopmerchant.adapter;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.supertridents.ecom.merchant.MainActivity;
-import com.supertridents.ecom.merchant.R;
-import com.supertridents.ecom.merchant.ShopActivity;
-import com.supertridents.ecom.merchant.model.ProductModel;
+import com.pratikcodes.shopmerchant.R;
+import com.pratikcodes.shopmerchant.model.ProductModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.supertridents.ecom.merchant.ShopActivity.categoryId;
 
 public class ProductViewHolder extends RecyclerView.Adapter<ProductViewHolder.ViewHolder> {
 

@@ -1,4 +1,4 @@
-package com.supertridents.ecom.merchant.model;
+package com.pratikcodes.shopmerchant.model;
 
 public class ProductModel {
     String catId, description, image, name, price;
